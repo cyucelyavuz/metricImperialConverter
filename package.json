@@ -2,6 +2,7 @@
 	"name": "fcc-imperial-metric-converter-boilerplate",
 	"version": "1.0.0",
 	"description": "Metric / Imperial Unit Converter",
+	"author":"Can Yucel Yavuz",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
