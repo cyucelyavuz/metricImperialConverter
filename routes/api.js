@@ -7,4 +7,10 @@ module.exports = function (app) {
   
   let convertHandler = new ConvertHandler();
 
+  app.route('/api/convert')
+      .get((req,res)=>{
+        res.json({input:req.query});
+        console.log(req.query);
+      });
+
 };
