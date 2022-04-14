@@ -1,9 +1,8 @@
+const selectReg = /\w/;
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    let result;
-    
-    return result;
+    return input.slice(0,input.indexOf(selectReg)-1);
   };
   
   this.getUnit = function(input) {
