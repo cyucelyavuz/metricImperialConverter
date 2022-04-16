@@ -14,7 +14,7 @@ function ConvertHandler() {
          } else{
            num = input.slice(0,input.indexOf(/[a-zA-z]/));
          } 
-  return num;
+  return Number(num);
   };
   
   this.getUnit = function(input) {
