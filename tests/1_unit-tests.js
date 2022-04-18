@@ -90,7 +90,7 @@ suite('Unit Tests', function(){
                     assert.equal(convertHandler.spellOutUnit(elem),'gallons');
                     break;
                     case 'L':
-                    assert.equal(convertHandler.spellOutUnit(elem),'litres');
+                    assert.equal(convertHandler.spellOutUnit(elem),'liters');
                     break;
                     case 'mi':
                     assert.equal(convertHandler.spellOutUnit(elem),'miles');
@@ -110,32 +110,32 @@ suite('Unit Tests', function(){
         })
         
         test('should correctly convert gal to L',(done)=>{
-            assert.equal(convertHandler.convert(2,'gal'),2*3.78541);
+            assert.equal(convertHandler.convert(2,'gal'),(2*3.78541).toFixed(5));
             done();
         });
 
         test('should correctly convert L to gal',(done)=>{
-            assert.equal(convertHandler.convert(5,'L'),5/3.78541);
+            assert.equal(convertHandler.convert(5,'L'),(5/3.78541).toFixed(5));
             done();
         });
 
         test('should correctly convert mi to km',(done)=>{
-            assert.equal(convertHandler.convert(2,'mi'),2*1.60934);
+            assert.equal(convertHandler.convert(2,'mi'),(2*1.60934).toFixed(5));
             done();
         });
 
         test('should correctly convert km to mi',(done)=>{
-            assert.equal(convertHandler.convert(5,'km'),5/1.60934);
+            assert.equal(convertHandler.convert(5,'km'),(5/1.60934).toFixed(5));
             done();
         });
 
         test('should correctly convert lbs to kg',(done)=>{
-            assert.equal(convertHandler.convert(5,'lbs'),5*0.453592);
+            assert.equal(convertHandler.convert(5,'lbs'),(5*0.453592).toFixed(5));
             done();
         });
 
         test('should correctly convert kg to lbs',(done)=>{
-            assert.equal(convertHandler.convert(5,'kg'),5/0.453592);
+            assert.equal(convertHandler.convert(5,'kg'),(5/0.453592).toFixed(5));
             done();
         });
 

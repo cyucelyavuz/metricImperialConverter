@@ -13,7 +13,7 @@ function ConvertHandler() {
   let num = input.split(/[a-zA-z]|\s/)[0];
   
   function fractionToDecimal(f) {
-    return f.split('/').reduce((n, d, i) => n / (i ? d : 1));
+    return Number(f.split('/').reduce((n, d, i) => n / (i ? d : 1)));
   }
   
   if (num) {
@@ -118,7 +118,9 @@ function ConvertHandler() {
       default:
         result='error';
     }
-    return result;
+    if (result==='error') return result;
+    else return Number(result.toFixed(5));
+    
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
