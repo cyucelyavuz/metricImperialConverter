@@ -1,27 +1,36 @@
+const { init } = require("express/lib/application");
 
-const valUnitReg= /gal|l|lb|kg|mi|km/i;
-const valNumReg= /^\d*\.{0,1}\d*$|^\d*\/\d*$/;
+const valUnitReg= /gal|l|lbs|kg|mi|km/i;
+const valNumReg= /^\d*\.{0,1}\d*$|^\d*\.{0,1}\d*\/\d*\.{0,1}\d*$/;
 
 
 
 function ConvertHandler() {
   
+
   this.getNum = function(input) {
-  let num;
-   if (input.search(valUnitReg)!==-1) {
-         num =input.slice(0,input.search(valUnitReg));
-         if(!num.match(valNumReg)) num='invalid num';
-         } else{
-           num = input.slice(0,input.indexOf(/[a-zA-z]/));
-         } 
-  return Number(num);
-  };
+  
+  let num = input.split(/[a-zA-z]|\s/)[0];
+  
+  function fractionToDecimal(f) {
+    return f.split('/').reduce((n, d, i) => n / (i ? d : 1));
+  }
+  
+  if (num) {
+    if(!valNumReg.test(num)) num='invalid number';
+    else {
+      if(num.indexOf('/')>=0) num=fractionToDecimal(num);
+      else num=Number(num);
+    }
+  } else num=1;
+  return num;
+};
   
   this.getUnit = function(input) {
     if (input.search(valUnitReg)===-1) return 'invalid unit';
     let result=input.slice(input.search(valUnitReg),);
     result=result.toLowerCase();
-    if((result==='gal') || (result==='l') || (result==='lb') || (result==='kg') || (result==='mi') || (result==='km')){
+    if((result==='gal') || (result==='l') || (result==='lbs') || (result==='kg') || (result==='mi') || (result==='km')){
       if(result==='l') result='L';
       return result;
     } else return 'invalid unit';
@@ -61,7 +70,7 @@ function ConvertHandler() {
         result= 'gallons';
         break;
       case 'L':
-        result = 'litres';
+        result = 'liters';
         break;
       case 'lbs':
         result = 'pounds';
@@ -73,7 +82,7 @@ function ConvertHandler() {
         result = 'miles';
         break;
       case 'km':
-        result = 'kilometres';
+        result = 'kilometers';
         break;
       default:
         result='unkown unit';
@@ -86,6 +95,7 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
+    
     switch(initUnit){
       case 'gal':
         result= initNum*galToL;
